@@ -21,7 +21,7 @@
                             <div class="panel-body">
                                 <form action="/accounts/register/" method="post">
                                     {% csrf_token %}
-                                    {% bootstrap_form form %}
+                                    {% bootstrap_form loginform %}
                                     <div class="form-group" style="text-align: center;">
                                         <input type="submit" class="btn btn-md" style="background-color: #56ab2f; color: white; width: 400px;" value="Sign Up">
                                     </div>                                
@@ -32,7 +32,7 @@
                         <br>                        
                         <hr>
                         <div class="panel-footer">
-                            <p>To create an account and link with your neighbourhood .Click <span><a href="/accounts/register" style="color: green;">Create.</a></span></p>
+                            <p>To create an account and link with your neighbourhood .Click <span><a href="{% url 'register' %}" style="color: green;">Create.</a></span></p>
                         </div>
                     </div>
                 </div>
