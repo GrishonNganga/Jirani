@@ -34,7 +34,7 @@ def profile(request):
         user.picture = profile_image
         user.save()
     
-    return render(request, 'profile.html', {'user': user})
+    return render(request, 'profile.html', {'user': user}) # To access the profile image of the user -> user.picture.url
 
 
 
