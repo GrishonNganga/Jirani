@@ -4,12 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-<<<<<<< HEAD
-    url(r'login$', views.logIn, name='login'),
-=======
-    url(r'^$', views.home, name='home'),
+    url(r'', views.home, name='home'),
     url(r'login$', views.login, name='login'),
->>>>>>> e112882bbbec96c70b951a281175589734ee2d69
     url(r'register$', views.register, name='register'),
     url(r'announce/', views.announcement, name='announce'),
     url(r'blog/', views.blog, name='blog'),

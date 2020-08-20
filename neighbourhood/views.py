@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm, UserLoginForm
-from .models import User
+from .forms import UserRegistrationForm, UserLoginForm, AddBizForm
+from .models import User, Business
 from django.contrib.auth import login, authenticate
-
-=======
-from django.shortcuts import render,redirect
-from .forms import AddBizForm,UserRegistrationForm 
-from .models import Business
->>>>>>> e112882bbbec96c70b951a281175589734ee2d69
 
 def register(request):
     if request.method == 'POST' and register_user(request):
@@ -32,7 +25,6 @@ def home(request):
     
     return render(request, "index.html")
 
-<<<<<<< HEAD
 
 def register_user(request):
 
@@ -71,7 +63,6 @@ def validate_and_login_user(request):
         return True
         
         
-=======
 #Profile page
 def profile(request):
     
@@ -114,4 +105,3 @@ def essential(request):
 def meeting(request):
     
     return render(request, "meeting.html")
->>>>>>> e112882bbbec96c70b951a281175589734ee2d69
