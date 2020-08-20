@@ -11,7 +11,6 @@ def register(request):
     registerform = UserRegistrationForm()        
     return render(request, "registration_form.html", {'register_form': registerform})
 
-
 def logIn(request):
     if request.method == 'POST' and request.POST.get('username') and request.POST.get('password'):
         if validate_and_login_user(request):
@@ -23,6 +22,20 @@ def logIn(request):
 def home(request):
     hoods = Hood.get_all_hoods()
     return render(request, "index.html", {'hoods': hoods})
+
+
+@login_required(login_url='/login')
+def profile(request):
+    user = request.user
+    
+    if request.method == 'POST' and request.FILES.get('profile'):
+        profile_image = request.FILES.get('profile')
+        
+        user.picture = profile_image
+        user.save()
+    
+    return render(request, 'profile.html', {'user': user})
+
 
 
 def register_user(request):

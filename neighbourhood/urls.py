@@ -7,6 +7,8 @@ urlpatterns = [
     url(r'login$', views.logIn, name='login'),
     url(r'register$', views.register, name='register'),
     url(r'^$', views.home, name='home'),
+    url(r'^profile$', views.profile, name='profile'),
+    
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,10 @@
+<img src="{{ user.picture.url}}" alt="">
+
+{{user.picture.url}}
+
+<form method="post" enctype="multipart/form-data" action="/profile">
+    {% csrf_token %}
+        
+    <input type="file" name="profile" id="upload">
+    <button type="submit">post</button>
+</form>
