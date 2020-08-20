@@ -1,26 +1,27 @@
 {% extends 'base.html' %}
 {{block.super}}
-{% block content %}
-    <div class="jumbotron jumbo" >                
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">
-                <h5 class="heading"> Jirani</h5>
-                <p style="color: grey;text-align: center;"><em>Connect with the hood...</em></p>                    
-            </div>
-            <div class="col"></div>
-        </div>
-        <div class="row" style="padding: 0 10px;">
-            <div class=" col">            
+{% block content %}    
+    <div class="container-fluid">                
+        <div class="row" style="padding: 0 10px;">            
+            <div class="col-md-4">            
                 <!-- Announcements section-->
                 <div class="head"  style="width: fit-content; background-color: white; position:absolute; margin-left: 40px;">
                     <h6 style="padding:0 10px; color: green;">Announcements</h6>
                 </div>
-                <div class="container" style="background-color: #def6c2; margin-top: 15px;">                  
-                  <div class="container" style="border-radius: 5px; height: 250px; max-height:235px; overflow-y: scroll;">
-                    <!--Announcements content here -->
+                <div class="container" style="background-color: #ecfad2; margin-top: 15px;">                  
+                  <div class="container" style="border-radius: 5px; height: 250px; max-height:235px; padding-top: 25px; overflow-y: scroll;">
+                    
+                    <!--loop -->
+                        <a href="{% url 'announce' %}" style="color: black;">
+                            <div class="card" style="height: fit-content;">
+                                <h5 style="padding:0 5px; color: green; font-weight:bold;">First announcement</h5>
+                                <p style="padding-left: 35px;">Small truncate details of anno..</p>
+                                <p style="padding-left:55%;"> -<span style="font-weight:bold;">Annoying neighbour</span></p>                        
+                            </div>
+                        </a>                
+                        <hr>
+                    <!-- endloop -->
+
                   </div>  
                 </div>
                 
@@ -28,29 +29,65 @@
 
                 <!-- Meetings section -->
                 <div class="head"  style="width: fit-content; background-color: white; position:absolute; margin-left: 40px;">
-                    <h6 style="padding:0 10px; color: red;">Meetings</h6>
+                    <h6 style="padding:0 10px; color: green;">Meetings</h6>
                 </div>
-                <div class="container" style="background-color:  #f8d5c7e3; margin-top: 15px;">                  
-                  <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; overflow-y: scroll;">
-                    <!--Meetings content here -->
+                <div class="container" style="background-color:  #f8ffdaf3;; margin-top: 15px;">                  
+                  <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; padding-top: 25px; overflow-y: scroll;">
+                  
+                    <!--loop -->
+                    <a href="{% url 'meeting' %}" style="color: black;">
+                        <div class="card" style="height: fit-content;">
+                            <h5 style="padding:0 5px; color: green; font-weight:bold;">Meeting reminder</h5>
+                            <p style="padding-left: 35px;">Small truncate details of meet..</p>
+                            <p style="display: inline-block; padding: 10px;"> Venue:<span style="font-weight:bold;padding-right:20px; ">Kwa neighbour</span> -<span style="font-weight:bold;">Annoying neighbour</span></p>                                                    
+                        </div>
+                    </a>                
+                    <hr>
+                    <!-- endloop -->
+
                   </div>  
                 </div>
-            </div>
-            <!-- Blog content-->
-            <div class="col">
-                <div class="container" style="height: 500px; background-color: lightgoldenrodyellow; max-height: 490; overflow-y: scroll;">
-                    blogs
-                </div>               
-            </div>
+            </div>            
 
-            <div class="col">            
-                <!-- Esssentials section -->
+            <!-- Blog content-->
+            <div class="col-md-4">
+                <br>
+                <div class="container" style="height: 470px; background-color: #ecfad2; max-height: 460; overflow-y: scroll;">
+                    
+                    <!--loop -->
+                    <a href="{% url 'blog' %}" style="color: black;"><div class="card" style="height: fit-content">
+                        <div class="img">
+                            <h4 style="position: absolute; color: white; padding: 15px;">Phase5 complete!!</h4>
+                        </div>                                                
+                        <div class="card-body">                            
+                            <p style="padding-left: 15px;">The much awaited phase5 is now complete. Furnishing is on...</p>
+                            <p style=" padding-right:55px;"> - <span style="font-weight:bold;">Annoying neighbour</span></p>                        
+                        </div>
+                    </div></a>
+                    <!-- endloop -->
+
+                </div>               
+            </div>      
+
+            <!-- Esssentials section -->
+            <div class="col-md-4">            
+                <br>                
                 <div class="head"  style="width: fit-content; position:absolute; margin-left: 40px; background-color: white;">
                     <h6 style="padding:0 10px; color: rgb(155, 118, 32);">Essentials</h6>
                 </div>
-                <div class="container" style="background-color:  rgb(250, 233, 194); margin-top: 15px;">                  
-                  <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; overflow-y: scroll;">
-                    <!--Essential  content here -->
+                <div class="container" style="background-color:#f8ffdaf3; margin-top: 15px;">                  
+                  <div class="container" style="border-radius: 5px; height: 200px; max-height:190px;padding-top: 20px; overflow-y: scroll;">                    
+
+                    <!--loop -->
+                    <a href="{% url 'essential' %}" style="color: black;">
+                        <div class="card" style="height: fit-content;">
+                            <h5 style="padding:0 5px; color: green; font-weight:bold;">Hospital now open</h5>
+                            <p style="padding-left: 35px;">Small truncate details of essen..</p>                            
+                        </div>
+                    </a>                
+                    <hr>
+                    <!-- endloop -->
+
                   </div>  
                 </div>
 
@@ -60,9 +97,19 @@
                 <div class="head"  style="width: fit-content; background-color: white; position:absolute; margin-left: 40px;">
                     <h6 style="padding:0 10px; color: rgb(143, 124, 19);">Business</h6>
                 </div>
-                <div class="container" style="background-color: #f4ffb6 ; margin-top: 15px;">                  
-                  <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; overflow-y: scroll;">
-                    <!--Business content here -->
+                <div class="container" style="background-color: #ecfad2 ; margin-top: 15px;">                  
+                  <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; padding-top: 20px; overflow-y: scroll;">
+                   
+                    <!--loop -->
+                    <a href="{% url 'business' %}" style="color: black;">
+                        <div class="card" style="height: fit-content;">
+                            <h5 style="padding:0 5px; color: green; font-weight:bold;">Do you want fresh farm produce?</h5>
+                            <p style="padding-left: 35px;">Small truncate details of busi..</p>                            
+                        </div>
+                    </a>                
+                    <hr>
+                    <!-- endloop -->
+
                   </div>  
                 </div>
                                 
@@ -70,8 +117,12 @@
         </div>
     </div>
     <style>
-        .jumbo {
-            background: linear-gradient(to top,  hsla(20, 3%, 22%, 0.465), hsla(20, 2%, 30%, 0.39)) , url(https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80);
-        }
+        .img {
+            background: linear-gradient(to top,  transparent, hsla(0, 0%, 6%, 0.479)) , url(https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80);    
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 250px;
+        }        
     </style>
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{{block.super}}
+{% block content %}
+
+    <h1>Profile</h1>
+    <form method="post" enctype="multipart/form-data" action="/profile">
+        {% csrf_token %}
+            
+        <input type="file" name="profile" id="upload">
+        <button type="submit">post</button>
+        <img src="{{ user.picture.url}}" alt="">
+
+    </form>
+    
+{% endblock %}
