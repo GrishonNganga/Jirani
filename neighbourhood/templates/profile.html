@@ -1,10 +1,15 @@
-<img src="{{ user.picture.url}}" alt="">
+{% extends 'base.html' %}
+{{block.super}}
+{% block content %}
 
-{{user.picture.url}}
+    <h1>Profile</h1>
+    <form method="post" enctype="multipart/form-data" action="/profile">
+        {% csrf_token %}
+            
+        <input type="file" name="profile" id="upload">
+        <button type="submit">post</button>
+        <img src="{{ user.picture.url}}" alt="">
 
-<form method="post" enctype="multipart/form-data" action="/profile">
-    {% csrf_token %}
-        
-    <input type="file" name="profile" id="upload">
-    <button type="submit">post</button>
-</form>
+    </form>
+    
+{% endblock %}
