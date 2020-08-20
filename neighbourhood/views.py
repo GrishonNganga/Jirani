@@ -26,7 +26,6 @@ def home(request):
     
     return render(request, "index.html")
 
-<<<<<<< HEAD
 #Profile page
 def profile(request):
     
@@ -56,7 +55,6 @@ def essential(request):
 def meeting(request):
     
     return render(request, "meeting.html")
-=======
 
 def register_user(request):
 
@@ -95,4 +93,3 @@ def validate_and_login_user(request):
         return True
         
         
->>>>>>> grishon1
