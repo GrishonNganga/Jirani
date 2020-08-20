@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from .forms import UserRegistrationForm 
-
+from django.shortcuts import render,redirect
+from .forms import AddBizForm,UserRegistrationForm 
+from .models import Business
 
 def register(request):
     registerform = UserRegistrationForm()
@@ -33,9 +33,22 @@ def blog(request):
     return render(request, "blog.html")
 
 #Business page
-def business(request):
-    
-    return render(request, "business.html")
+def business(request,hood_id):
+    biznas = Business.filter_by_hood(hood_id)
+    return render(request, "business.html",{"biznas":biznas})
+
+def create_business(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddBizForm(request.POST, request.FILES)
+        if form.is_valid():
+            biz = form.save(commit=False)
+            biz.user = current_user
+            biz.save()
+        return redirect('index')    
+    else:
+        form = AddBizForm
+    return render(request, 'new-biz.html', {'form':form})        
 
 #Essential page
 def essential(request):
