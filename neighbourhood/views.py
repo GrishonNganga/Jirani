@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, UserLoginForm
 from .models import User, Hood
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
 
 def register(request):
@@ -18,8 +19,7 @@ def logIn(request):
     loginform = UserLoginForm()
     return render(request, 'login.html', {'login_form': loginform})
 
-
-#Home page
+# @login_required(login_url='/login')
 def home(request):
     hoods = Hood.get_all_hoods()
     return render(request, "index.html", {'hoods': hoods})

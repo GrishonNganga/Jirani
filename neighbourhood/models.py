@@ -21,3 +21,7 @@ class Business(models.Model):
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to='profiles/')
