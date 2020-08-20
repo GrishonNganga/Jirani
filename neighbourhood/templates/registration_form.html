@@ -27,8 +27,9 @@
                     {% endif %}
                     <div class="panel panel-default">                        
                         <div class="panel-body">
-                            <form action="/accounts/register/" method="post">
-                                {% csrf_token %}                               
+                            <form action="#" method="post">
+                                {% csrf_token %}
+                                {% bootstrap_form register_form %}
                                 <div class="form-group" style="text-align: center;">
                                     <input type="submit" class="btn btn-md" style="background-color: #56ab2f; color: white; width: 400px;" value="Sign Up">
                                 </div>
