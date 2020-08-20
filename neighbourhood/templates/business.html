@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {{block.super}}
 {% block content %}
+  <div class="container" style="text-align: center;">
+    {% for bizna in biznas %}
+      <h3>{{bizna.name}}</h3>
+      <p style="padding-top:30px;"> {{bizna.description}}</p>
 
-    <h1>Business</h1>
-    
+      <h6 style="color: grey; padding:20px;"> ------Business Info-------</h6>
+      <p> <span style="font-weight:bold">Email: </span> {{bizna.email}}</p>
+      <p> <span style="font-weight:bold">posted by: </span> {{bizna.user.username}} </p>
+      {% endfor%}
+  </div>
 {% endblock %}
