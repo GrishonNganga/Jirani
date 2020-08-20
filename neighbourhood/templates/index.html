@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{{block.super}}
+{% block content %}
+    <div class="jumbotron jumbo" >                
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <h5 class="heading"> Jirani</h5>
+                <p style="color: grey;text-align: center;"><em>Connect with the hood...</em></p>                    
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row" style="padding: 0 10px;">
+            <div class=" col">            
+                <!-- Announcements section-->
+                <div class="head"  style="width: fit-content; background-color: white; position:absolute; margin-left: 40px;">
+                    <h6 style="padding:0 10px; color: green;">Announcements</h6>
+                </div>
+                <div class="container" style="background-color: #def6c2; margin-top: 15px;">                  
+                  <div class="container" style="border-radius: 5px; height: 250px; max-height:235px; overflow-y: scroll;">
+                    <!--Announcements content here -->
+                  </div>  
+                </div>
+                
+                <br>
+
+                <!-- Meetings section -->
+                <div class="head"  style="width: fit-content; background-color: white; position:absolute; margin-left: 40px;">
+                    <h6 style="padding:0 10px; color: red;">Meetings</h6>
+                </div>
+                <div class="container" style="background-color:  #f8d5c7e3; margin-top: 15px;">                  
+                  <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; overflow-y: scroll;">
+                    <!--Meetings content here -->
+                  </div>  
+                </div>
+            </div>
+            <!-- Blog content-->
+            <div class="col">
+                <div class="container" style="height: 500px; background-color: lightgoldenrodyellow; max-height: 490; overflow-y: scroll;">
+                    blogs
+                </div>               
+            </div>
+
+            <div class="col">            
+                <!-- Esssentials section -->
+                <div class="head"  style="width: fit-content; position:absolute; margin-left: 40px; background-color: white;">
+                    <h6 style="padding:0 10px; color: rgb(155, 118, 32);">Essentials</h6>
+                </div>
+                <div class="container" style="background-color:  rgb(250, 233, 194); margin-top: 15px;">                  
+                  <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; overflow-y: scroll;">
+                    <!--Essential  content here -->
+                  </div>  
+                </div>
+
+                <br>
+
+                <!-- Business section -->
+                <div class="head"  style="width: fit-content; background-color: white; position:absolute; margin-left: 40px;">
+                    <h6 style="padding:0 10px; color: rgb(143, 124, 19);">Business</h6>
+                </div>
+                <div class="container" style="background-color: #f4ffb6 ; margin-top: 15px;">                  
+                  <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; overflow-y: scroll;">
+                    <!--Business content here -->
+                  </div>  
+                </div>
+                                
+            </div>
+        </div>
+    </div>
+    <style>
+        .jumbo {
+            background: linear-gradient(to top,  hsla(20, 3%, 22%, 0.465), hsla(20, 2%, 30%, 0.39)) , url(https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80);
+        }
+    </style>
+{% endblock %}
