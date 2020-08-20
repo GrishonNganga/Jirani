@@ -11,6 +11,10 @@ class Hood(models.Model):
     population = models.CharField(max_length=100)
     admin = models.ManyToManyField(User) 
 
+    @classmethod
+    def get_all_hoods(cls):
+        return(Hood.objects.all())
+
 class Business(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()

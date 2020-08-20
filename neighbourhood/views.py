@@ -21,8 +21,7 @@ def logIn(request):
 
 #Home page
 def home(request):
-    hoods = Hood.objects.all()
-    print(hoods)
+    hoods = Hood.get_all_hoods()
     return render(request, "index.html", {'hoods': hoods})
 
 
