@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import User,Business
+from .models import User, Business
 from django import forms
 
 class UserRegistrationForm(UserCreationForm):

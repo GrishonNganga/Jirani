@@ -1,7 +1,29 @@
 {% extends 'base.html' %}
 {{block.super}}
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <div class="card">
+                <img src="" style="width:250px; height:350px;">
+                <h2>Username</h2>
+                <h3>Email</h3>
+                <h3>Hood</h3>        
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+    
+        
 
-    <h1>Profile</h1>
+
+        <form method="post" enctype="multipart/form-data" action="/profile">
+            {% csrf_token %}            
+            <input type="file" name="profile" id="upload">
+            <button type="submit">post</button>
+            <img src="{{ user.picture.url}}" alt="">
+        </form>
     
 {% endblock %}
