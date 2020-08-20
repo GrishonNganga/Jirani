@@ -1,3 +1,6 @@
 from django.contrib import admin
-
-# Register your models here.
+from .models import User, Business, Hood
+ 
+admin.site.register(User)
+admin.site.register(Hood)
+admin.site.register(Business)

@@ -80,13 +80,14 @@ DATABASES = {
         'NAME': 'jirani', #Update with your own db credentials
         'USER': 'postgres',
         'PASSWORD': '12345678',
-        
+
     }
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
+AUTH_USER_MODEL = 'neighbourhood.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
