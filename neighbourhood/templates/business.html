@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {{block.super}}
 {% block content %}
-
-    <h1>Business</h1>
+  {% for bizna in biznas %}
+    {{bizna.name}}
+    {{bizna.description}}
+    {{bizna.email}}
+    posted by: {{bizna.user.username}}
+  {% endfor%}
     
 {% endblock %}
