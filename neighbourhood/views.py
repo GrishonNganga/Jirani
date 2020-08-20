@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from .forms import AddBizForm,UserRegistrationForm 
-from .models import Business
+from .forms import AddBizForm,AnnouncementForm,UserRegistrationForm 
+from .models import Business,Announcement
 
 def register(request):
     registerform = UserRegistrationForm()
@@ -23,9 +23,22 @@ def profile(request):
     return render(request, "profile.html")
 
 #Announcement page
-def announcement(request):
-    
-    return render(request, "announcement.html")
+def announcement(request,hood_id):
+    news = Announcement.filter_by_hood(hood_id)     
+    return render(request, "announcement.html",{"news":news})
+
+def create_announcement(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST, request.FILES)
+        if form.is_valid():
+            announcement = form.save(commit=False)
+            announcement.user = current_user
+            announcement.save()
+        return redirect('index')    
+    else:
+        form = AddBizForm
+    return render(request, 'new-announcement.html', {'form':form})   
 
 #Blog page
 def blog(request):

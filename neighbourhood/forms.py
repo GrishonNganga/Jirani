@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from .models import User,Business
+from .models import User,Business,Announcement
 from django import forms
 
 class UserRegistrationForm(UserCreationForm):
@@ -16,4 +16,8 @@ class UserLoginForm(UserCreationForm):
 class AddBizForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ['name','email','description']        
+        fields = ['name','email','description'] 
+
+class AnnouncementForm(forms.ModelForm):
+    model = Announcement
+    fields = ['title','content',]               

@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {{block.super}}
 {% block content %}
-
-    <h1>Announcement</h1>
+    {% for info in news %}
+        {{info.title}}
+        {{info.contact}}
+        {{info.date}}
+        posted by: {{info.user.username}}
+    {% endfor%}
     
 {% endblock %}

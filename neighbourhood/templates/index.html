@@ -12,7 +12,7 @@
                   <div class="container" style="border-radius: 5px; height: 250px; max-height:235px; padding-top: 25px; overflow-y: scroll;">
                     
                     <!--loop -->
-                        <a href="{% url 'announce' %}" style="color: black;">
+                        <a href="/announce/{{hood.id}}" style="color: black;">
                             <div class="card" style="height: fit-content;">
                                 <h5 style="padding:0 5px; color: green; font-weight:bold;">First announcement</h5>
                                 <p style="padding-left: 35px;">Small truncate details of anno..</p>
@@ -101,7 +101,7 @@
                   <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; padding-top: 20px; overflow-y: scroll;">
                    
                     <!--loop -->
-                    <a href="{% url 'business' %}" style="color: black;">
+                    <a href="/business/{{hood.id}}" style="color: black;">
                         <div class="card" style="height: fit-content;">
                             <h5 style="padding:0 5px; color: green; font-weight:bold;">Do you want fresh farm produce?</h5>
                             <p style="padding-left: 35px;">Small truncate details of busi..</p>                            
