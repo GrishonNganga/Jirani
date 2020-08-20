@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 
 class User(AbstractUser):
@@ -22,3 +23,16 @@ class Business(models.Model):
     def filter_by_hood(cls,id):
         businesses = cls.objects.filter(hood_id = id)
         return businesses
+
+class Announcement(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @classmethod
+    def filter_by_hood(cls,id):
+        news = cls.objects.filter(hood_id = id)
+        return news
+
