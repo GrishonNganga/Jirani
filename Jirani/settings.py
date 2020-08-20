@@ -79,7 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'jirani', #Update with your own db credentials
-        
+        'USER': 'postgres',
+        'PASSWORD': '12345678',
 
     }
 }
