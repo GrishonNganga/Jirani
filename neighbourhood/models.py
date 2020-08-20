@@ -30,3 +30,20 @@ class Business(models.Model):
     def filter_by_hood(cls,id):
         businesses = cls.objects.filter(hood_id = id)
         return businesses
+
+
+class Profile(models.Model):
+    name = models.CharField(max_length=50, default='')
+    location = models.CharField(max_length=100, default='')
+    neighbourhood = models.CharField(max_length=250, default='')
+    user = models.OneToOneField(User, on_delete=models.CASCADE) 
+
+    
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance, name=instance.get_full_name(), location='', neighbourhood='')
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

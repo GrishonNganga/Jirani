@@ -7,9 +7,18 @@
         {% csrf_token %}
             
         <input type="file" name="profile" id="upload">
-        <button type="submit">post</button>
+
+        <button type="submit">Change photo</button>
         <img src="{{ user.picture.url}}" alt="">
 
+    </form>
+
+    <form action="/profile" method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="{{ user.profile.name }}">
+        <input type="text" name="location" placeholder="{{ user.profile.location }}">
+        <input type="text" name="neighbourhood" placeholder="{{ user.profile.neighbourhood }}">
+        <button type="submit">Update profile</button>
     </form>
     
 {% endblock %}
