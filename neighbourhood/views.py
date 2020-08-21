@@ -23,14 +23,15 @@ def logIn(request):
 @login_required(login_url='/login')
 def home(request):
     user = request.user
-    
     if not Profile.objects.filter(user=user).exists():
         return redirect('/profile')
     user_hood = user.profile.neighbourhood
     businesses_in_hood = Business.objects.filter(hood = user_hood) 
     news_in_hood = Announcement.objects.filter(hood = user_hood)
-    print(businesses_in_hood)
-    return render(request, "index.html", {'businesses': businesses_in_hood, 'announcements': news_in_hood})
+    meetings_in_hood = Meeting.objects.filter(hood = user_hood)
+    essentials_in_hood = Essential.objects.filter(hood =user_hood)
+    
+    return render(request, "index.html", {'businesses': businesses_in_hood, 'announcements': news_in_hood,'meetings':meetings_in_hood,'essentials':essentials_in_hood})
     
 
 
@@ -105,12 +106,9 @@ def essential(request):
 
 #Meeting page
 def meeting(request):
+    meetings = Meeting.objects.all()
+    return render(request, "meeting.html", {'meetings':meetings})
     
-    return render(request, "meeting.html")
-
-
-
-
 def register_user(request):
     form = UserRegistrationForm(request.POST)
     if form.is_valid():
@@ -197,10 +195,6 @@ def create_profile_for_user(user):
     user_profile.save()
     user.save()
     return True
-
-    
-    meetings = Meeting.objects.all()
-    return render(request, "meeting.html", {'meetings':meetings})
 
 def search_results(request):
 

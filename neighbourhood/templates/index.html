@@ -12,16 +12,23 @@
                   <div class="container" style="border-radius: 5px; height: 250px; max-height:235px; padding-top: 25px; overflow-y: scroll;">
                     
                     <!--loop -->
+                {% if announcements %}
                     {% for announcement in announcements %}
                         <a href="/announce/{{ announcement.id }}" style="color: black;">
                             <div class="card" style="height: fit-content;">
                                 <h5 style="padding:0 5px; color: green; font-weight:bold;">{{ announcement.title }}</h5>
-                                <p style="padding-left: 35px;">{{ announcement.content }}</p>
+                                <p style="padding-left: 35px;">{{ announcement.content | truncatewords:5 }}</p>
                                 <p style="padding-left:55%;"><span style="font-weight:bold;">{{ announcement.user.username }}</span></p>                        
                             </div>
                         </a>                
                         <hr>
                         {% endfor %}
+                {% else %}
+                    <div class="card" style="height: fit-content;">
+                        <h5 style="padding:0 5px; color: green; font-weight:bold;">No announcements</h5>
+                        <p style="padding-left: 35px;"> If you have any, contact your admin to add them.</p>                            
+                    </div>
+                {% endif %}
                     <!-- endloop -->
 
                   </div>  
@@ -35,17 +42,26 @@
                 </div>
                 <div class="container" style="background-color:  #f8ffdaf3;; margin-top: 15px;">                  
                   <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; padding-top: 25px; overflow-y: scroll;">
-                  
+                 
+                {% if meetings %}    
                     <!--loop -->
-                    <a href="{% url 'meeting' %}" style="color: black;">
+                    {% for meeting in meetings %}
+                    <a href="/meeting/{{ meeting.id }}" style="color: black;">
                         <div class="card" style="height: fit-content;">
-                            <h5 style="padding:0 5px; color: green; font-weight:bold;">Meeting reminder</h5>
-                            <p style="padding-left: 35px;">Small truncate details of meet..</p>
-                            <p style="display: inline-block; padding: 10px;"> Venue:<span style="font-weight:bold;padding-right:20px; ">Kwa neighbour</span> -<span style="font-weight:bold;">Annoying neighbour</span></p>                                                    
+                            <h5 style="padding:0 5px; color: green; font-weight:bold;">{{meeting.title}}</h5>
+                            <p style="padding-left: 35px;">{{meeting.description}}</p>
+                            <p style="display: inline-block; padding: 10px;"> Venue:<span style="font-weight:bold;padding-right:20px; ">{{meeting.venue}}</span> -<span style="font-weight:bold;">{{meeting.user.username}}</span></p>                                                    
                         </div>
                     </a>                
                     <hr>
+                    {% endfor %}
                     <!-- endloop -->
+                {% else %}
+                    <div class="card" style="height: fit-content;">
+                        <h5 style="padding:0 5px; color: green; font-weight:bold;">No meetings in your hood</h5>
+                        <p style="padding-left: 35px;"> Contact your admin to add a scheduled meeting</p>                            
+                    </div>
+                {% endif %}
 
                   </div>  
                 </div>
@@ -81,13 +97,23 @@
                   <div class="container" style="border-radius: 5px; height: 200px; max-height:190px;padding-top: 20px; overflow-y: scroll;">                    
 
                     <!--loop -->
-                    <a href="{% url 'essential' %}" style="color: black;">
-                        <div class="card" style="height: fit-content;">
-                            <h5 style="padding:0 5px; color: green; font-weight:bold;">Hospital now open</h5>
-                            <p style="padding-left: 35px;">Small truncate details of essen..</p>                            
-                        </div>
-                    </a>                
-                    <hr>
+                {% if essentials %}
+                    {% for essential in essentials %}
+                        <a href="/essential/{{ essential.id }}" style="color: black;">
+                            <div class="card" style="height: fit-content;">
+                                <h5 style="padding:0 5px; color: green; font-weight:bold;">{{ essential.name}}</h5>
+                                <p style="padding-left: 35px;">{{ essential.description | truncatewords:5 }}</p>
+                                <p style="padding-left:55%;"><span style="font-weight:bold;">{{ essential.user.username }}</span></p>                        
+                            </div>
+                        </a>                
+                        <hr>
+                    {% endfor %}
+                {% else %}
+                    <div class="card" style="height: fit-content;">
+                        <h5 style="padding:0 5px; color: green; font-weight:bold;">No Essential Services available</h5>
+                        <p style="padding-left: 35px;"> Contact your admin to add them.</p>                            
+                    </div>
+                {% endif %}
                     <!-- endloop -->
 
                   </div>  
@@ -103,16 +129,24 @@
                   <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; padding-top: 20px; overflow-y: scroll;">
                    
                     <!--loop -->
-                    {% for biz in businesses %}
-                    <a href="/business/{{biz.id}}" style="color: black;">
-                        <div class="card" style="height: fit-content;">
-                            <h5 style="padding:0 5px; color: green; font-weight:bold;">{{ biz.name }}</h5>
-                            <p style="padding-left: 35px;">{{ biz.description | truncatewords:5}}</p>                            
-                        </div>
-                    </a>             
-                    <hr>
-                    {% endfor %}  
-                    <button class="btn btn-success" onclick="window.location.href = '/business';">View more</button> 
+                  {% if businesses %}
+                  <button class="btn btn-success" onclick="window.location.href = '/business';">View more</button> 
+                  {% for biz in businesses %}
+                  <a href="/business/{{biz.id}}" style="color: black;">
+                      <div class="card" style="height: fit-content;">
+                          <h5 style="padding:0 5px; color: green; font-weight:bold;">{{ biz.name }}</h5>
+                          <p style="padding-left: 35px;">{{ biz.description | truncatewords:5}}</p>                            
+                      </div>
+                  </a>             
+                  <hr>
+                  {% endfor %} 
+                  {% else %}
+                  <div class="card" style="height: fit-content;">
+                    <h5 style="padding:0 5px; color: green; font-weight:bold;">No businesses available</h5>
+                    <p style="padding-left: 35px;"> Ask your admin to add them.</p>                            
+                  </div>
+                  {% endif %} 
+                    
                     <!-- endloop -->
 
                   </div>  
