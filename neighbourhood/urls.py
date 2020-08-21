@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'login$', views.logIn, name='login'),
     url(r'^$', views.home, name='home'),
     url(r'register$', views.register, name='register'),
-    url(r'announce/(\d+)', views.announcement, name='announce'),
+    url(r'announce/', views.announcement, name='announce'),
     url(r'announce/new/', views.create_announcement, name='new-announcement'),
     url(r'^profile$', views.profile, name='profile'),
     url(r'^blog/$', views.blog, name='blog'),
@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^new/business/$', views.create_business, name='add-business'),
     url(r'^essential/$', views.essential, name='essential'),
     url(r'^meeting/$', views.meeting, name='meeting'),
+    url(r'^search/', views.search_results, name='search_results'),
 ]
 
 if settings.DEBUG:
