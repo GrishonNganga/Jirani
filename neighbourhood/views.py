@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import AddBizForm,AnnouncementForm,UserRegistrationForm 
-from .models import User, Business,Announcement, Blog
+from .models import User, Business,Announcement, Blog,Essential,Meeting
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 
@@ -16,7 +16,7 @@ def register(request):
 def logIn(request):
     if request.method == 'POST' and request.POST.get('username') and request.POST.get('password'):
         if validate_and_login_user(request):
-            return redirect('/')
+            return redirect('/profile')
     loginform = UserLoginForm()
     return render(request, 'login.html', {'login_form': loginform})
 
@@ -96,8 +96,8 @@ def validate_and_login_user(request):
     return render(request, "index.html")
 
 #Announcement page
-def announcement(request,hood_id):
-    news = Announcement.filter_by_hood(hood_id)     
+def announcement(request):
+    news = Announcement.objects.all()     
     return render(request, "announcement.html",{"news":news})
 
 def create_announcement(request):
@@ -115,21 +115,22 @@ def create_announcement(request):
 
 #Blog page
 def blog(request):
-    blogs = Blog.filter_by_hood(hood_id)
+    blogs = Blog.objects.all()
     return render(request, "blog.html", {'blogs': blogs})
 
 #Business page
-def business(request):#,hood_id):
-    #biznas = Business.filter_by_hood(hood_id)
-    return render(request, "business.html")#,{"biznas":biznas})
+def business(request):
+    biznas = Business.objects.all()
+    return render(request, "business.html",{"biznas":biznas})
 
 def create_business(request):
     current_user = request.user
-    if request.method == 'POST':
+    if request.method == 'POST' and current_user.is_admin == True:
         form = AddBizForm(request.POST, request.FILES)
         if form.is_valid():
             biz = form.save(commit=False)
             biz.user = current_user
+            biz.hood = current_user.profile.neighbourhood
             biz.save()
         return redirect('index')    
     else:
@@ -138,10 +139,23 @@ def create_business(request):
 
 #Essential page
 def essential(request):
-    
-    return render(request, "essential.html")
+    essentials = Essential.objects.all()
+    return render(request, "essential.html",{'essentials':essentials})
 
 #Meeting page
 def meeting(request):
-    
-    return render(request, "meeting.html")
+    meetings = Meeting.objects.all()
+    return render(request, "meeting.html", {'meetings':meetings})
+
+def search_results(request):
+
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        searched_businesses = Business.search_by_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'business.html',{"message":message,"businesses": searched_businesses})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'business.html',{"message":message})
