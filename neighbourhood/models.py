@@ -9,6 +9,7 @@ class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
     picture = models.ImageField(default='profiles/default.jpg', upload_to='profiles/')
 
+
 class Hood(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
@@ -19,6 +20,7 @@ class Hood(models.Model):
     @classmethod
     def get_all_hoods(cls):
         return(Hood.objects.all())
+
 
 class Business(models.Model):
     name = models.CharField(max_length=100)
@@ -31,6 +33,8 @@ class Business(models.Model):
     def filter_by_hood(cls,id):
         businesses = cls.objects.filter(hood_id = id)
         return businesses
+
+
 
 class Announcement(models.Model):
     title = models.CharField(max_length=100)
@@ -45,6 +49,7 @@ class Announcement(models.Model):
         return news
 
 
+
 class Blog(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -56,6 +61,7 @@ class Blog(models.Model):
     def filter_by_hood(cls,id):
         news = cls.objects.filter(hood_id = id)
         return news
+
 
 
 class Profile(models.Model):
@@ -73,3 +79,29 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+class Meeting(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    venue = models.CharField(max_length=150)
+    date = models.DateTimeField(auto_now_add=True)
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @classmethod
+    def filter_by_hood(cls,id):
+        meetings = cls.objects.filter(hood_id = id)
+        return meetings
+
+
+
+class Essential(models.Model):
+    name = models.CharField(max_length=100)
+    contact = models.CharField(max_length=50,blank=True)
+    description = models.TextField()
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @classmethod
+    def filter_by_hood(cls,id):
+        essentials = cls.objects.filter(hood_id = id)
+        return essentials        
