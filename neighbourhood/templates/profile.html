@@ -66,7 +66,12 @@
                                                     <input type="text" class="form-control" name="location" placeholder="{{ user.profile.location }}" style="background-color: rgba(22, 192, 50, 0.137);">
                                                 </div>
                                                 <div class="row" style="padding: 15px;">
-                                                    <input type="text" class="form-control" name="neighbourhood" placeholder="{{ user.profile.neighbourhood }}" style="background-color: rgba(22, 192, 50, 0.137);">
+                                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" style="width: 200px;">
+                                                        <option selected>Choose Hood...</option>
+                                                        <option value="1">Hood 1</option>
+                                                        <option value="2">Hood 2</option>
+                                                        <option value="3">Hood 3</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-success">Update profile</button>
