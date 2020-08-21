@@ -57,3 +57,27 @@ class Blog(models.Model):
         news = cls.objects.filter(hood_id = id)
         return news
 
+class Meeting(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    venue = models.CharField(max_length=150)
+    date = models.DateTimeField(auto_now_add=True)
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @classmethod
+    def filter_by_hood(cls,id):
+        meetings = cls.objects.filter(hood_id = id)
+        return meetings
+
+class Essential(models.Model):
+    name = models.CharField(max_length=100)
+    contact = models.CharField(max_length=50,blank=True)
+    description = models.TextField()
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @classmethod
+    def filter_by_hood(cls,id):
+        essentials = cls.objects.filter(hood_id = id)
+        return essentials        
