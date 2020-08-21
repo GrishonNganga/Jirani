@@ -2,6 +2,16 @@
 {{block.super}}
 {% block content %}
 
-    <h1>Announcement</h1>
+    <div class="container" style="width:700px;">
+        <h4 style="color: green; border:solid green 0.01em; width: fit-content; padding:5px 15px;">Announcements</h4>
+    </div>
+    <div class="container" style=" border: solid green 0.01em; height: 480px; max-height: 470px; width:700px; overflow-y: scroll;">        
+        <!-- Announcement loop-->
+          <h5 style="font-weight: bold; color: green; padding: 10px;">Announcement heading</h5>
+          <p style="text-align: center;"> Description of Announcement</p>                    
+          <p> <span style="padding-left: 70%; font-weight:bold">posted by: </span> POSTED BY </p>        
+        <hr>
+        <!-- endloop -->
+    </div>
     
 {% endblock %}

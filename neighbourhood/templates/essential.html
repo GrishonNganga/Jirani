@@ -2,6 +2,16 @@
 {{block.super}}
 {% block content %}
 
-    <h1>essential</h1>
+    <div class="container" style="width:650px;">
+        <h4 style="color: green; border:solid green 0.01em; width: fit-content; padding:5px 15px;">Essential Services</h4>
+    </div>
+    <div class="container" style="border: solid green 0.01em; height: 480px; max-height: 470px; width:650px; overflow-y: scroll;">        
+        <!-- Essential loop-->
+          <h5 style="font-weight: bold;padding:15px ; color: green;">Name of essential</h5>          
+          <p style="text-align: center;"> <span style="font-weight:bold;">Help Line: </span>991 | 0700-023-445</p>
+          <p style="margin-left:70%;"> <span style="font-weight:bold ">posted by: </span> POSTED BY </p>        
+        <hr>
+        <!-- endloop -->
+    </div>
     
 {% endblock %}

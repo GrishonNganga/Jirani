@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 {{block.super}}
 {% block content %}
-  <div class="container" style="text-align: center;">
-    {% for bizna in biznas %}
-      <h3>{{bizna.name}}</h3>
-      <p style="padding-top:30px;"> {{bizna.description}}</p>
 
-      <h6 style="color: grey; padding:20px;"> ------Business Info-------</h6>
-      <p> <span style="font-weight:bold">Email: </span> {{bizna.email}}</p>
-      <p> <span style="font-weight:bold">posted by: </span> {{bizna.user.username}} </p>
-      {% endfor%}
+  <div class="container" style="width:650px;">
+    <h4 style="color: white; background: green; width: fit-content; padding:5px 15px;">Business in the hood</h4>
   </div>
+  <div class="container" style="text-align: center; border: solid green 0.01em; height: 480px; max-height: 470px; width:650px; overflow-y: scroll;">        
+    {% for bizna in biznas %}
+      <h5 style="font-weight: bold; color: green;">{{bizna.name}}</h5>
+      <p> {{bizna.description}}</p>   
+      <h6 style="color: grey; padding:20px;"> ------Business Info-------</h6>       
+      <p> <span style="font-weight:bold">{{bizna.email}}</p>
+      <p> <span style="font-weight:bold">posted by: </span> {{bizna.user.username}}</p>        
+    <hr>
+    {% endfor%}
+  </div>
+
 {% endblock %}

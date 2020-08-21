@@ -110,9 +110,9 @@ def blog(request):
     return render(request, "blog.html")
 
 #Business page
-def business(request,hood_id):
-    biznas = Business.filter_by_hood(hood_id)
-    return render(request, "business.html",{"biznas":biznas})
+def business(request):#,hood_id):
+    #biznas = Business.filter_by_hood(hood_id)
+    return render(request, "business.html")#,{"biznas":biznas})
 
 def create_business(request):
     current_user = request.user

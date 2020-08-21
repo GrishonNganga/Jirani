@@ -13,16 +13,17 @@
                     <div class="row">
                         <div class="col">
                             <img src="https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" style="width:380px; height:360px;">                    
-                            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter" style="background:rgba(255, 255, 255, 0.603); position:absolute; bottom:5px; right: 25px;">Edit</button>
+                            <button type="button" class="btn" data-toggle="modal" data-target="#profilepicture" style="background:rgba(255, 255, 255, 0.603); position:absolute; bottom:5px; right: 25px;">Edit</button>
                         </div>
                         <div class="col">                            
                             <h5 style="margin-top: 20%; color: green; font-weight: bold;">Username</h5>
                             <h6 style="color: grey; padding-top: 20px;">usersampleuser@gmail.com</h6>
-                            <p style="padding-top: 20px;"><em>User Hood</em></p>        
+                            <p style="padding-top: 20px;"><em>User Hood</em></p>
+                            <button type="button" class="btn" data-toggle="modal" data-target="#editprofile" style="background:rgba(255, 255, 255, 0.603); position:absolute; bottom:5px; right: 25px;">Edit Profile</button>        
                         </div>
                         
                         <!--Edit profile pictire modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="profilepicture" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -43,6 +44,39 @@
                             </div>
                         </div> 
                         <!-- end of modal--> 
+
+                        <!--Edit profile modal -->
+                        <div class="modal fade" id="editprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4>Update profile</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/profile" method="POST">
+                                            {% csrf_token %}
+                                            <div class="col">
+                                                <div class="row" style="padding: 15px;">
+                                                    <input type="text" class="form-control" name="name" placeholder="{{ user.profile.name }}" style="background-color: rgba(22, 192, 50, 0.137);">
+                                                </div>
+                                                <div class="row" style="padding: 15px;">                                                    
+                                                    <input type="text" class="form-control" name="location" placeholder="{{ user.profile.location }}" style="background-color: rgba(22, 192, 50, 0.137);">
+                                                </div>
+                                                <div class="row" style="padding: 15px;">
+                                                    <input type="text" class="form-control" name="neighbourhood" placeholder="{{ user.profile.neighbourhood }}" style="background-color: rgba(22, 192, 50, 0.137);">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Update profile</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <!-- end of modal--> 
                         
                     </div>      
                 </div>
@@ -50,29 +84,7 @@
         </div>
         <div class="col"></div>
     </div>
-</div>
-    
-        
-
-    <h1>Profile</h1>
-    <form method="post" enctype="multipart/form-data" action="/profile">
-        {% csrf_token %}
-            
-        <input type="file" name="profile" id="upload">
-
-        <button type="submit">Change photo</button>
-        <img src="{{ user.picture.url}}" alt="">
-
-    </form>
-
-    <form action="/profile" method="POST">
-        {% csrf_token %}
-        <input type="text" name="name" placeholder="{{ user.profile.name }}">
-        <input type="text" name="location" placeholder="{{ user.profile.location }}">
-        <input type="text" name="neighbourhood" placeholder="{{ user.profile.neighbourhood }}">
-        <button type="submit">Update profile</button>
-    </form>
-    
+</div>                
 </div>               
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 {% endblock %}
