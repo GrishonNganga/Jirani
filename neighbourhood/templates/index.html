@@ -12,14 +12,16 @@
                   <div class="container" style="border-radius: 5px; height: 250px; max-height:235px; padding-top: 25px; overflow-y: scroll;">
                     
                     <!--loop -->
-                        <a href="/announce/{{hood.id}}" style="color: black;">
+                    {% for announcement in announcements %}
+                        <a href="/announce/{{ announcement.id }}" style="color: black;">
                             <div class="card" style="height: fit-content;">
-                                <h5 style="padding:0 5px; color: green; font-weight:bold;">First announcement</h5>
-                                <p style="padding-left: 35px;">Small truncate details of anno..</p>
-                                <p style="padding-left:55%;"> -<span style="font-weight:bold;">Annoying neighbour</span></p>                        
+                                <h5 style="padding:0 5px; color: green; font-weight:bold;">{{ announcement.title }}</h5>
+                                <p style="padding-left: 35px;">{{ announcement.content }}</p>
+                                <p style="padding-left:55%;"><span style="font-weight:bold;">{{ announcement.user.username }}</span></p>                        
                             </div>
                         </a>                
                         <hr>
+                        {% endfor %}
                     <!-- endloop -->
 
                   </div>  
@@ -101,13 +103,16 @@
                   <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; padding-top: 20px; overflow-y: scroll;">
                    
                     <!--loop -->
-                    <a href="/business/{{hood.id}}" style="color: black;">
+                    {% for biz in businesses %}
+                    <a href="/business/{{biz.id}}" style="color: black;">
                         <div class="card" style="height: fit-content;">
-                            <h5 style="padding:0 5px; color: green; font-weight:bold;">Do you want fresh farm produce?</h5>
-                            <p style="padding-left: 35px;">Small truncate details of busi..</p>                            
+                            <h5 style="padding:0 5px; color: green; font-weight:bold;">{{ biz.name }}</h5>
+                            <p style="padding-left: 35px;">{{ biz.description | truncatewords:5}}</p>                            
                         </div>
-                    </a>                
+                    </a>             
                     <hr>
+                    {% endfor %}  
+                    <button class="btn btn-success" onclick="window.location.href = '/business';">View more</button> 
                     <!-- endloop -->
 
                   </div>  

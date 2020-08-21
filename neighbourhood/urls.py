@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^profile$', views.profile, name='profile'),
     url(r'^blog/$', views.blog, name='blog'),
     url(r'^business/$', views.business, name='business'),
+    url(r'^business/(\d+)$', views.selected_business, name='selected_business'),
     url(r'^new/business/$', views.create_business, name='add-business'),
     url(r'^essential/$', views.essential, name='essential'),
     url(r'^meeting/$', views.meeting, name='meeting'),

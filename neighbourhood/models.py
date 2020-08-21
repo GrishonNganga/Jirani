@@ -70,7 +70,7 @@ class Blog(models.Model):
 class Profile(models.Model):
     name = models.CharField(max_length=50, default='')
     location = models.CharField(max_length=100, default='')
-    neighbourhood = models.OneToOneField(Hood, on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(Hood, on_delete=models.CASCADE)
     user = models.OneToOneField(User, on_delete=models.CASCADE) 
 
    
