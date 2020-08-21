@@ -10,11 +10,11 @@ urlpatterns = [
     url(r'announce/(\d+)', views.announcement, name='announce'),
     url(r'announce/new/', views.create_announcement, name='new-announcement'),
     url(r'^profile$', views.profile, name='profile'),
-    url(r'blog/', views.blog, name='blog'),
-    url(r'business/(\d+)', views.business, name='business'),
-    url(r'business/new/', views.create_business, name='add-business'),
-    url(r'essential/', views.essential, name='essential'),
-    url(r'meeting/', views.meeting, name='meeting'),
+    url(r'^blog/$', views.blog, name='blog'),
+    url(r'^business/$', views.business, name='business'),
+    url(r'^new/business/$', views.create_business, name='add-business'),
+    url(r'^essential/$', views.essential, name='essential'),
+    url(r'^meeting/$', views.meeting, name='meeting'),
 ]
 
 if settings.DEBUG:

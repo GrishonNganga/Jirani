@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
 {{block.super}}
-{% block content %}
-
-    <h1>Meeting</h1>
+{% block content %}    
+    
+    <div class="container" style="width:650px;">
+        <h4 style="color: white; background: green; width: fit-content; padding:5px 15px;">Meetings</h4>
+    </div>
+    <div class="container" style="text-align: center; border: solid green 0.01em; height: 480px; max-height: 470px; width:650px; overflow-y: scroll;">        
+        <!-- Meeting loop-->
+          <h5 style="font-weight: bold; color: green;">Agenga of meeting</h5>
+          <p> Description of meeting</p>          
+          <p> <span style="font-weight:bold">Venue </span> Meeting venue</p>
+          <p> <span style="font-weight:bold">posted by: </span> POSTED BY </p>        
+        <hr>
+        <!-- endloop -->
+    </div>
     
 {% endblock %}
