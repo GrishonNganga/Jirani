@@ -7,18 +7,47 @@
 <div class="container">
     <div class="row">
         <div class="col"></div>
-        <div class="col-md-8" style="text-align: center;">
+        <div class="col-md-9" style="text-align: center;">
             <div class="container">
                 <div class="card">
                     <div class="row">
                         <div class="col">
-                            <img src="https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" style="width:380px; height:360px;">                    
+                            <img src="{{ user.picture.url}}" style="width:380px; height:360px;">                    
                             <button type="button" class="btn" data-toggle="modal" data-target="#profilepicture" style="background:rgba(255, 255, 255, 0.603); position:absolute; bottom:5px; right: 25px;">Edit</button>
                         </div>
-                        <div class="col">                            
-                            <h5 style="margin-top: 20%; color: green; font-weight: bold;">Username</h5>
-                            <h6 style="color: grey; padding-top: 20px;">usersampleuser@gmail.com</h6>
-                            <p style="padding-top: 20px;"><em>User Hood</em></p>
+                        <div class="col">  
+                            {% if user.profile.name %}                          
+                                <h2 style="margin-top: 20%; color: green; font-weight: bold;">{{ user.profile.name }}</h2>
+                            {% else %}
+                                <h2 style="margin-top: 20%; color: green; font-weight: bold;">{{ user.username }}</h2>
+                            {% endif %}
+                            {% if user.profile.location %}                            
+                                <h6 style="color: grey; padding-top: 20px;">{{ user.profile.location }}</h6>
+                            {% else %}
+                                <h6 style="color: grey; padding-top: 20px;">No location set</h6>
+                            {% endif %}    
+                            {% if hood.name %}
+                                <p style="padding-top: 20px;"><em>{{ hood.name }}</em></p>                            
+                            {% else %}
+                                <p style="padding-top: 20px;"><em>No hood set</em></p>
+                            {% endif %}
+                            
+                            <!--- Notifyers-->
+                            {% if user.profile.location  and  hood.name %} 
+                            
+                            {% else %}
+
+                                {% if user.profile.location %}                                                            
+                                {% else %}
+                                    <p style="font-size: 10px; color: green;"> Click <span style="font-weight: bold;">Edit Profile</span> to enter your nearest location</p>
+                                {% endif %}
+
+                                {% if hood.name %}                            
+                                {% else %}
+                                    <p style="font-size: 10px; color: green;"> Click <span style="font-weight: bold;">Edit Profile</span> to enter your hood</p>
+                                {% endif %}
+
+                            {% endif %}
                             <button type="button" class="btn" data-toggle="modal" data-target="#editprofile" style="background:rgba(255, 255, 255, 0.603); position:absolute; bottom:5px; right: 25px;">Edit Profile</button>        
                         </div>
                         
@@ -37,7 +66,7 @@
                                             {% csrf_token %}            
                                             <input type="file" name="profile" id="upload">
                                             <button type="submit" class="btn btn-success">Change profile</button>
-                                            <img src="{{ user.picture.url}}" alt="">
+                                            <img src="{{ user.picture.url}}" alt="" style="width: 150px; height: 150px;">
                                         </form>
                                     </div>
                                 </div>
