@@ -1,4 +1,4 @@
-# Awwards
+# Jirani
 
 #### An app that allows a user to be in the loop about everything happening in their neighbourhood.
 

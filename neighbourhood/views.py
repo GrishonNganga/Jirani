@@ -85,6 +85,22 @@ def selected_business(request, id):
     return render(request, 'business.html',{"businesses": to_display_biz})
 
 
+def selected_meeting(request, id):
+    meeting = Meeting.objects.get(id = id)
+    to_display_meeting = []
+    to_display_meeting.append(meeting)
+
+    return render(request, 'meeting.html',{"meetings": to_display_meeting})
+
+
+def selected_essential(request, id):
+    essential = Essential.objects.get(id = id)
+    to_display_essential = []
+    to_display_essential.append(essential)
+
+    return render(request, 'essential.html',{"essentials": to_display_essential})
+
+
 def create_business(request):
     current_user = request.user
     if request.method == 'POST' and current_user.is_admin == True:
@@ -99,16 +115,19 @@ def create_business(request):
         form = AddBizForm
     return render(request, 'new-biz.html', {'form':form})        
 
-#Essential page
-def essential(request):
-    essentials = Essential.objects.all()
-    return render(request, "essential.html",{'essentials':essentials})
-
 #Meeting page
 def meeting(request):
-    meetings = Meeting.objects.all()
+    meetings = Meeting.objects.filter(hood = request.user.profile.neighbourhood.id)
     return render(request, "meeting.html", {'meetings':meetings})
-    
+
+ 
+#Essentials page
+def essential(request):
+    essentials = Essential.objects.filter(hood = request.user.profile.neighbourhood.id)
+    return render(request, "essential.html", {'essentials':essentials})
+
+
+
 def register_user(request):
     form = UserRegistrationForm(request.POST)
     if form.is_valid():

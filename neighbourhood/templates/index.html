@@ -44,6 +44,7 @@
                   <div class="container" style="border-radius: 5px; height: 200px; max-height:190px; padding-top: 25px; overflow-y: scroll;">
                  
                 {% if meetings %}    
+                <button class="btn btn-success" onclick="window.location.href = '/meeting';">View more</button> 
                     <!--loop -->
                     {% for meeting in meetings %}
                     <a href="/meeting/{{ meeting.id }}" style="color: black;">

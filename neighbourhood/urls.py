@@ -16,6 +16,8 @@ urlpatterns = [
     url(r'^new/business/$', views.create_business, name='add-business'),
     url(r'^essential/$', views.essential, name='essential'),
     url(r'^meeting/$', views.meeting, name='meeting'),
+    url(r'^meeting/(\d+)$', views.selected_meeting, name='selected_meeting'),
+    url(r'^essential/(\d+)$', views.selected_essential, name='selected_essential'),
     url(r'^search/', views.search_results, name='search_results'),
 ]
 
