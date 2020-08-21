@@ -70,15 +70,7 @@ class Profile(models.Model):
     neighbourhood = models.CharField(max_length=250, default='')
     user = models.OneToOneField(User, on_delete=models.CASCADE) 
 
-    
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance, name=instance.get_full_name(), location='', neighbourhood='')
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+   
 class Meeting(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
