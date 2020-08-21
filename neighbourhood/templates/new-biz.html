@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-9" style="padding: 0 70px;">
                 <form  action="{%url 'add-business'%}" method="post" enctype="multipart/form-data">
-
+                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <div class="form-group" style="text-align: center;">
                         <input type="submit" class="btn btn-md" style="background-color: #56ab2f; color: white; width: 200px;" value="Register Business">

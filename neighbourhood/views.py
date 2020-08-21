@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from .forms import AddBizForm,AnnouncementForm,UserRegistrationForm 
-from .models import User, Business,Announcement, Blog
+from .models import User, Business,Announcement, Blog,Essential,Meeting
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 
 from .forms import UserRegistrationForm, UserLoginForm, AddBizForm
-from .models import User, Hood, Business
+from .models import User, Hood, Business, Profile
 
 def register(request):
     if request.method == 'POST' and register_user(request):
@@ -16,14 +16,23 @@ def register(request):
 def logIn(request):
     if request.method == 'POST' and request.POST.get('username') and request.POST.get('password'):
         if validate_and_login_user(request):
-            return redirect('/')
+            return redirect('/profile')
     loginform = UserLoginForm()
     return render(request, 'login.html', {'login_form': loginform})
 
 @login_required(login_url='/login')
 def home(request):
-    hoods = Hood.get_all_hoods()
-    return render(request, "index.html", {'hoods': hoods})
+    user = request.user
+    if not Profile.objects.filter(user=user).exists():
+        return redirect('/profile')
+    user_hood = user.profile.neighbourhood
+    businesses_in_hood = Business.objects.filter(hood = user_hood) 
+    news_in_hood = Announcement.objects.filter(hood = user_hood)
+    meetings_in_hood = Meeting.objects.filter(hood = user_hood)
+    essentials_in_hood = Essential.objects.filter(hood =user_hood)
+    
+    return render(request, "index.html", {'businesses': businesses_in_hood, 'announcements': news_in_hood,'meetings':meetings_in_hood,'essentials':essentials_in_hood})
+    
 
 
 @login_required(login_url='/login')
@@ -39,8 +48,8 @@ def profile(request):
 
 
 #Announcement page
-def announcement(request,hood_id):
-    news = Announcement.filter_by_hood(hood_id)     
+def announcement(request):
+    news = Announcement.objects.all()     
     return render(request, "announcement.html",{"news":news})
 
 def create_announcement(request):
@@ -58,37 +67,64 @@ def create_announcement(request):
 
 #Blog page
 def blog(request):
-    blogs = Blog.filter_by_hood(hood_id)
+    blogs = Blog.objects.all()
     return render(request, "blog.html", {'blogs': blogs})
 
 #Business page
-def business(request):#,hood_id):
-    #biznas = Business.filter_by_hood(hood_id)
-    return render(request, "business.html")#,{"biznas":biznas})
+def business(request):
+    hood = request.user.profile.neighbourhood
+    biznas = Business.objects.filter(hood = hood.id)
+    
+    return render(request, "business.html",{"biznas":biznas})
+
+def selected_business(request, id):
+    biz = Business.objects.get(id = id)
+    to_display_biz = []
+    to_display_biz.append(biz)
+
+    return render(request, 'business.html',{"businesses": to_display_biz})
+
+
+def selected_meeting(request, id):
+    meeting = Meeting.objects.get(id = id)
+    to_display_meeting = []
+    to_display_meeting.append(meeting)
+
+    return render(request, 'meeting.html',{"meetings": to_display_meeting})
+
+
+def selected_essential(request, id):
+    essential = Essential.objects.get(id = id)
+    to_display_essential = []
+    to_display_essential.append(essential)
+
+    return render(request, 'essential.html',{"essentials": to_display_essential})
+
 
 def create_business(request):
     current_user = request.user
-    if request.method == 'POST':
+    if request.method == 'POST' and current_user.is_admin == True:
         form = AddBizForm(request.POST, request.FILES)
         if form.is_valid():
             biz = form.save(commit=False)
             biz.user = current_user
+            biz.hood = current_user.profile.neighbourhood
             biz.save()
-        return redirect('index')    
+        return redirect('/business')    
     else:
         form = AddBizForm
     return render(request, 'new-biz.html', {'form':form})        
 
-#Essential page
-def essential(request):
-    
-    return render(request, "essential.html")
-
 #Meeting page
 def meeting(request):
-    
-    return render(request, "meeting.html")
+    meetings = Meeting.objects.filter(hood = request.user.profile.neighbourhood.id)
+    return render(request, "meeting.html", {'meetings':meetings})
 
+ 
+#Essentials page
+def essential(request):
+    essentials = Essential.objects.filter(hood = request.user.profile.neighbourhood.id)
+    return render(request, "essential.html", {'essentials':essentials})
 
 
 
@@ -151,6 +187,7 @@ def change_profile(request):
     if location:
         change_field(user, location_field,location)
     if neighbourhood:
+        neighbourhood = Hood.objects.get(id = int(neighbourhood))
         change_field(user, neighbourhood_field,neighbourhood)
     
     if not name and not location and not neighbourhood:
@@ -158,10 +195,35 @@ def change_profile(request):
     else: return True
 
 def change_field(user, field_name, field_value):
-    setattr(user.profile, field_name, field_value)
+    if check_if_user_has_profile(user):
+        setattr(user.profile, field_name, field_value)
+        user.profile.save()
+    else:
+        create_profile_for_user(user) 
+        setattr(user.profile, field_name, field_value)
     user.save()
 
     
-        
-        
+def check_if_user_has_profile(user):
+    return Profile.objects.filter(user=user.id).exists()
     
+def create_profile_for_user(user):
+    hood = Hood.objects.get(id = 1)
+    user_profile = Profile(name = '', location='', user= user, neighbourhood=hood)
+    user.profile = user_profile
+    user_profile.save()
+    user.save()
+    return True
+
+def search_results(request):
+
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        searched_businesses = Business.search_by_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'business.html',{"message":message,"businesses": searched_businesses})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'business.html',{"message":message})

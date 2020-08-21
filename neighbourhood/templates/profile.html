@@ -67,9 +67,9 @@
                                                 </div>
                                                 <div class="row" style="padding: 15px;">
                                                     <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" style="width: 200px;" name='neighbourhood'>
-                                                        <option selected>{{user.profile.neighbourhood}}</option>
+                                                        <option selected value="{{user.profile.neighbourhood.id}}">{{user.profile.neighbourhood.name}}</option>
                                                         {% for hood in hoods %}
-                                                        <option value="{{hood.name}}">{{ hood.name }}</option>
+                                                        <option value="{{hood.id}}">{{ hood.name }}</option>
                                                         {% endfor %}
                                                     </select>
                                                 </div>

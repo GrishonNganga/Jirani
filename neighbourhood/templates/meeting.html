@@ -7,11 +7,13 @@
     </div>
     <div class="container" style="text-align: center; border: solid green 0.01em; height: 480px; max-height: 470px; width:650px; overflow-y: scroll;">        
         <!-- Meeting loop-->
-          <h5 style="font-weight: bold; color: green;">Agenga of meeting</h5>
-          <p> Description of meeting</p>          
-          <p> <span style="font-weight:bold">Venue </span> Meeting venue</p>
-          <p> <span style="font-weight:bold">posted by: </span> POSTED BY </p>        
+        {% for meeting in meetings %}
+          <h5 style="font-weight: bold; color: green;">{{meeting.title}}</h5>
+          <p>{{meeting.description}}</p>          
+          <p> <span style="font-weight:bold">Venue </span> {{meeting.venue}}</p>
+          <p> <span style="font-weight:bold">posted by:{{meeting.user.username}} </span> {{meeting.date}} </p>        
         <hr>
+        {% endfor %}
         <!-- endloop -->
     </div>
     
