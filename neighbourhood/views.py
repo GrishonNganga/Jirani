@@ -37,64 +37,6 @@ def profile(request):
     return render(request, 'profile.html', {'user': user})
 
 
-
-
-def change_profile_picture(request):
-    profile_image = request.FILES.get('profile')
-    if profile_image:
-        user.picture = profile_image
-        user.save()
-        return True
-    else:
-        return False
-
-
-def change_profile(request):
-    name = request.POST.get('name')
-    location = request.POST.get('location')
-    neighbourhood = request.POST.get('neighbourhood')
-    if name and location and neighbourhood:
-        user = request.user
-        user.profile.name = name
-        user.profile.location = location
-        user.profile.neighbourhood = neighbourhood
-        user.save()
-        return True
-    
-    return False
-
-    
-
-def register_user(request):
-    form = UserRegistrationForm(request.POST)
-    if form.is_valid():
-        form.save()
-        return True
-    else:
-        return False
-
-
-def check_if_user_exist(username, password):
-    if username == None or password == None:
-        return False
-    return User.objects.filter(username = username).exists()
-
-def authenticate_user(request, username, password):
-    return authenticate(request, username= username, password = password)
-  
-def validate_and_login_user(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    user_exists = check_if_user_exist(username, password)
-    if user_exists:
-        user = authenticate_user(request, username, password)
-    else:
-        return False
-    if user:
-        login(request, user)
-        return True  
-    return render(request, "index.html")
-
 #Announcement page
 def announcement(request,hood_id):
     news = Announcement.filter_by_hood(hood_id)     
@@ -145,3 +87,73 @@ def essential(request):
 def meeting(request):
     
     return render(request, "meeting.html")
+
+
+
+
+def register_user(request):
+    form = UserRegistrationForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return True
+    else:
+        return False
+
+
+def check_if_user_exist(username, password):
+    if username == None or password == None:
+        return False
+    return User.objects.filter(username = username).exists()
+
+def authenticate_user(request, username, password):
+    return authenticate(request, username= username, password = password)
+  
+def validate_and_login_user(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    user_exists = check_if_user_exist(username, password)
+    if user_exists:
+        user = authenticate_user(request, username, password)
+    else:
+        return False
+    if user:
+        login(request, user)
+        return True  
+    return render(request, "index.html")
+
+
+
+def change_profile_picture(request):
+    profile_image = request.FILES.get('profile')
+    if profile_image:
+        user.picture = profile_image
+        user.save()
+        return True
+    else:
+        return False
+
+
+def change_profile(request):
+    user = request.user
+    name = request.POST.get('name')
+    name_field = 'name'
+    location = request.POST.get('location')
+    location_field = 'location'
+    neighbourhood = request.POST.get('neighbourhood')
+    neighbourhood_field = 'neighbourhood'
+
+    if name:
+        change_field(user, name_field, name)
+    if location:
+        change_field(user, location_field,location)
+    if neighbourhood:
+        change_field(user, neighbourhood_field,neighbourhood)
+
+def change_field(user, field_name, field_value):
+    setattr(user.profile, field_name, field_value)
+    user.save()
+
+    
+        
+        
+    
