@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import AddBizForm,AnnouncementForm,UserRegistrationForm 
-from .models import User, Business,Announcement
+from .models import User, Business,Announcement, Blog
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 
@@ -20,7 +20,7 @@ def logIn(request):
     loginform = UserLoginForm()
     return render(request, 'login.html', {'login_form': loginform})
 
-# @login_required(login_url='/login')
+@login_required(login_url='/login')
 def home(request):
     hoods = Hood.get_all_hoods()
     return render(request, "index.html", {'hoods': hoods})
@@ -37,7 +37,6 @@ def profile(request):
         user.save()
     
     return render(request, 'profile.html', {'user': user}) # To access the profile image of the user -> user.picture.url
-
 
 
 def register_user(request):
@@ -90,8 +89,8 @@ def create_announcement(request):
 
 #Blog page
 def blog(request):
-    
-    return render(request, "blog.html")
+    blogs = Blog.filter_by_hood(hood_id)
+    return render(request, "blog.html", {'blogs': blogs})
 
 #Business page
 def business(request,hood_id):

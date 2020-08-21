@@ -44,3 +44,16 @@ class Announcement(models.Model):
         news = cls.objects.filter(hood_id = id)
         return news
 
+
+class Blog(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @classmethod
+    def filter_by_hood(cls,id):
+        news = cls.objects.filter(hood_id = id)
+        return news
+
