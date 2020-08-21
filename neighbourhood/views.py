@@ -34,7 +34,8 @@ def profile(request):
         return redirect('/profile')
         
     user = request.user
-    return render(request, 'profile.html', {'user': user})
+    hoods = Hood.get_all_hoods()
+    return render(request, 'profile.html', {'user': user, 'hoods': hoods})
 
 
 #Announcement page
@@ -124,6 +125,7 @@ def validate_and_login_user(request):
 
 
 def change_profile_picture(request):
+    user = request.user
     profile_image = request.FILES.get('profile')
     if profile_image:
         user.picture = profile_image
@@ -148,6 +150,10 @@ def change_profile(request):
         change_field(user, location_field,location)
     if neighbourhood:
         change_field(user, neighbourhood_field,neighbourhood)
+    
+    if not name and not location and not neighbourhood:
+        return False
+    else: return True
 
 def change_field(user, field_name, field_value):
     setattr(user.profile, field_name, field_value)
