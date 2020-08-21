@@ -143,6 +143,8 @@ def change_profile(request):
     location_field = 'location'
     neighbourhood = request.POST.get('neighbourhood')
     neighbourhood_field = 'neighbourhood'
+    neighbourhood = request.POST.get('neighbourhood')
+    neighbourhood_field = 'neighbourhood'
 
     if name:
         change_field(user, name_field, name)
