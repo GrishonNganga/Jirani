@@ -64,7 +64,6 @@ def change_profile(request):
     
 
 
-
 def register_user(request):
     form = UserRegistrationForm(request.POST)
     if form.is_valid():
