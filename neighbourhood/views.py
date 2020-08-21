@@ -28,16 +28,42 @@ def home(request):
 
 @login_required(login_url='/login')
 def profile(request):
-    user = request.user
-    
-    if request.method == 'POST' and request.FILES.get('profile'):
-        profile_image = request.FILES.get('profile')
+    if request.method == 'POST' and change_profile_picture(request):
+        return redirect('/profile') # To access the profile image of the user -> user.picture.url
+    elif request.method == 'POST' and change_profile(request):
+        return redirect('/profile')
         
+    user = request.user
+    return render(request, 'profile.html', {'user': user})
+
+
+
+
+def change_profile_picture(request):
+    profile_image = request.FILES.get('profile')
+    if profile_image:
         user.picture = profile_image
         user.save()
-    
-    return render(request, 'profile.html', {'user': user}) # To access the profile image of the user -> user.picture.url
+        return True
+    else:
+        return False
 
+
+def change_profile(request):
+    name = request.POST.get('name')
+    location = request.POST.get('location')
+    neighbourhood = request.POST.get('neighbourhood')
+    if name and location and neighbourhood:
+        user = request.user
+        user.profile.name = name
+        user.profile.location = location
+        user.profile.neighbourhood = neighbourhood
+        user.save()
+        return True
+    
+    return False
+
+    
 
 def register_user(request):
     form = UserRegistrationForm(request.POST)
@@ -93,9 +119,9 @@ def blog(request):
     return render(request, "blog.html", {'blogs': blogs})
 
 #Business page
-def business(request,hood_id):
-    biznas = Business.filter_by_hood(hood_id)
-    return render(request, "business.html",{"biznas":biznas})
+def business(request):#,hood_id):
+    #biznas = Business.filter_by_hood(hood_id)
+    return render(request, "business.html")#,{"biznas":biznas})
 
 def create_business(request):
     current_user = request.user
